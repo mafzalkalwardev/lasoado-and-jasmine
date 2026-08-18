@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #0b1a3a;
+  --navy-deep: #06101f;
+  --navy-mid: #12204a;
+  --navy-light: #1c2f63;
+  --gold: #c9a227;
+  --gold-light: #e0c36a;
+  --gold-dark: #a6851e;
+  --cream: #f6f1e6;
+  --cream-dark: #e8dfc8;
+  --ink: #0e1730;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-mid: var(--navy-mid);
+  --color-navy-light: var(--navy-light);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-ink: var(--ink);
+  --font-display: var(--font-montserrat);
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #a6851e 0%, #e8d48a 42%, #c9a227 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gold-fill {
+  background: linear-gradient(135deg, #a6851e 0%, #e0c36a 50%, #c9a227 100%);
+}
+
+.gold-border {
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+}
+
+.navy-panel {
+  background:
+    radial-gradient(1200px 500px at 10% -10%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 50%),
+    radial-gradient(900px 400px at 100% 0%, color-mix(in srgb, #3b82f6 18%, transparent), transparent 45%),
+    linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-deep) 100%);
+}
+
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.speed-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  transform-origin: left center;
+}
+
+.glass {
+  background: color-mix(in srgb, var(--navy-mid) 72%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--gold) 28%, white 8%);
+}
+
+.hairline-frame {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--gold) 40%, transparent),
+    0 24px 60px color-mix(in srgb, var(--navy-deep) 28%, transparent);
+}
+
+input,
+select,
+textarea {
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
